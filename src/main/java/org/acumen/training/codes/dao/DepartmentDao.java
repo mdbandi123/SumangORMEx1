@@ -7,7 +7,7 @@ import org.hibernate.Transaction;
 import org.jboss.logging.Logger;
 
 public class DepartmentDao {
-	private static final Logger LOGGER = Logger.getLogger(ClassroomDao.class);
+	private static final Logger LOGGER = Logger.getLogger(DepartmentDao.class);
 	private SessionFactory sf;
 
 	public DepartmentDao(SessionFactory sf) {

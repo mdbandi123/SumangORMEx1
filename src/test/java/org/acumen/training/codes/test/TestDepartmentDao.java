@@ -11,10 +11,11 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class TestDepartmentDao {
-	private static final Logger LOGGER = Logger.getLogger(TestClassroomDao.class);
+	private static final Logger LOGGER = Logger.getLogger(TestDepartmentDao.class);
 	private UnivConfiguration cfg;
 
-	private Department createDepartment(String deptName ,String building, Double budget) {
+	private Department createDepartment(String deptName ,String building, 
+										Double budget) {
 		Department data = new Department();
 		
 		data.setDeptName(deptName);
@@ -34,7 +35,6 @@ public class TestDepartmentDao {
 		cfg = null;
 	}
 
-	@Disabled
 	@Test
 	public void testInsertDepartment() {
 		cfg.createConfiguration();

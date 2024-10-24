@@ -15,7 +15,8 @@ public class TestClassroomDao {
 	private static final Logger LOGGER = Logger.getLogger(TestClassroomDao.class);
 	private UnivConfiguration cfg;
 
-	private Classroom createClassroom(String building, String roomNumber, Integer capacity) {
+	private Classroom createClassroom(String building, String roomNumber,
+										Integer capacity) {
 		ClassroomId idData = new ClassroomId();
 		Classroom data = new Classroom();
 
@@ -38,7 +39,6 @@ public class TestClassroomDao {
 		cfg = null;
 	}
 
-	@Disabled
 	@Test
 	public void testInsertClassroom() {
 		cfg.createConfiguration();

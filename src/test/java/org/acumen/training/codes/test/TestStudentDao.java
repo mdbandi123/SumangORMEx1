@@ -16,7 +16,8 @@ public class TestStudentDao {
 	private static final Logger LOGGER = Logger.getLogger(TestStudentDao.class);
 	private UnivConfiguration cfg;
 
-	private Student createStudent(String id, String name, String deptName, Integer totCred) {
+	private Student createStudent(String id, String name, String deptName, 
+									Integer totCred) {
 		Student data = new Student();
 		
 		data.setId(id);
@@ -37,7 +38,6 @@ public class TestStudentDao {
 		cfg = null;
 	}
 
-	@Disabled
 	@Test
 	public void testInsertStudent() {
 		cfg.createConfiguration();
@@ -50,7 +50,6 @@ public class TestStudentDao {
 		LOGGER.info("testInsertStudent() executed");
 	}
 	
-	@Disabled
 	@Test
 	public void testFindStudent() {
 		cfg.createConfiguration();

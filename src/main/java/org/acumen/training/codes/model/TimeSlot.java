@@ -40,5 +40,10 @@ public class TimeSlot {
 	public void setEndMin(Integer endMin) {
 		this.endMin = endMin;
 	}
+	
+	@Override
+	public String toString() {
+		return "%d %d %s %s %d %d".formatted(ids.getStartHr(), ids.getStartMin(), ids.getDay(), ids.getTimeSlotId(), endHr, endMin);
+	}
 
 }

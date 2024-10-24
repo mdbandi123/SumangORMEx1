@@ -25,4 +25,9 @@ public class Advisor {
 	public void setiId(String iId) {
 		this.iId = iId;
 	}
+	
+	@Override
+	public String toString() {
+		return "%s %s".formatted(sId, iId);
+	}
 }

@@ -15,10 +15,11 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class TestTeacherDao {
-	private static final Logger LOGGER = Logger.getLogger(TestClassroomDao.class);
+	private static final Logger LOGGER = Logger.getLogger(TestTeacherDao.class);
 	private UnivConfiguration cfg;
 
-	private Instructor createInstructor(String id, String name, String deptName, Double salary) {
+	private Instructor createInstructor(String id, String name, String deptName, 
+										Double salary) {
 		Instructor data = new Instructor();
 		
 		data.setId(id);
@@ -39,7 +40,6 @@ public class TestTeacherDao {
 		cfg = null;
 	}
 	
-	@Disabled
 	@Test
 	public void testUpdateSalary() {
 		cfg.createConfiguration();
@@ -50,7 +50,6 @@ public class TestTeacherDao {
 		LOGGER.info("testUpdateSalary() executed");
 	}
 	
-	@Disabled
 	@Test
 	public void testDeleteInstructor() {
 		cfg.createConfiguration();
@@ -60,21 +59,22 @@ public class TestTeacherDao {
 		dao.deleteInstructor("12345");
 		LOGGER.info("testUpdateSalary() executed");
 	}
-	
-	@Disabled
+
 	@Test
 	public void testInsertInstructor() {
 		cfg.createConfiguration();
 		SessionFactory sf = cfg.getSessionFactory();
 		TeacherDao dao = new TeacherDao(sf);
 		
-		dao.insertInstructor(createInstructor("12345","Sumang","Music",65000.00));
-		dao.insertInstructor(createInstructor("21222","Walter","Comp. Sci.",75000.00));
-		dao.insertInstructor(createInstructor("01012","Smith","Aviation",75000.00));
+		dao.insertInstructor(
+				createInstructor("12345","Sumang","Music",65000.00));
+		dao.insertInstructor(createInstructor(
+				"21222","Walter","Comp. Sci.",75000.00));
+		dao.insertInstructor(createInstructor(
+				"01012","Smith","Aviation",75000.00));
 		LOGGER.info("testInsertInstructor() executed");
 	}
 	
-	@Disabled
 	@Test
 	public void testFindInstructor() {
 		cfg.createConfiguration();

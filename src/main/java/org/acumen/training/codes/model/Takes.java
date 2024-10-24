@@ -31,4 +31,10 @@ public class Takes {
 		this.grade = grade;
 	}
 
+	@Override
+	public String toString() {
+		return "%s %s %s %s %d %s".formatted(ids.getCourseId(), ids.getId(), ids.getSecId(), ids.getSemester(),
+				ids.getYear(), grade);
+	}
+
 }

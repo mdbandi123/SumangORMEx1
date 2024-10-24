@@ -20,5 +20,8 @@ public class Prereq {
 		this.ids = ids;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "%s %s".formatted(ids.getCourseId(), ids.getPrereqId());
+	}
 }
