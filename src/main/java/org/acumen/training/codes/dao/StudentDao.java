@@ -4,7 +4,12 @@ import org.acumen.training.codes.model.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.jboss.logging.Logger;
+
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 
 public class StudentDao {
 	private SessionFactory sf;
@@ -45,5 +50,28 @@ public class StudentDao {
 			}
 		}
 		return false;
+	}
+	
+	public Student findStudent(String id) {
+		LOGGER.info("executing findStudent()...");
+		Student rec = new Student();
+		
+		try (Session sess = sf.openSession();) {
+			CriteriaBuilder builder = sess.getCriteriaBuilder();
+			CriteriaQuery<Student> sql = builder.createQuery(Student.class);
+			Root<Student> from = sql.from(Student.class);
+			
+			sql.select(from).where(builder.equal(from.get("id"), id));
+
+			Query<Student> query = sess.createQuery(sql);
+			
+			LOGGER.info("findStudent() executed successfully");
+			return rec = query.getSingleResult();
+		} catch (Exception e) {
+			LOGGER.error("caught an exception findStudent(): %s"
+					.formatted(e.getMessage()));
+			e.printStackTrace();
+		}
+		return rec;
 	}
 }

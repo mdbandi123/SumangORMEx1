@@ -63,4 +63,9 @@ public class Student {
 	public void setDept(Department dept) {
 		this.dept = dept;
 	}
+	
+	@Override
+	public String toString() {
+		return "%s %s %s %d".formatted(id, name, deptName, totCred);
+	}
 }

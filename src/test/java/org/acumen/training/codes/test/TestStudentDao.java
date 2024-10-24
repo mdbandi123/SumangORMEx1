@@ -47,4 +47,16 @@ public class TestStudentDao {
 		dao.insertStudent(createStudent("10002", "Park", "Aviation", 101));
 		LOGGER.info("testInsertStudent() executed");
 	}
+	
+	@Test
+	public void testFindStudent() {
+		cfg.createConfiguration();
+		SessionFactory sf = cfg.getSessionFactory();
+		StudentDao dao = new StudentDao(sf);
+		
+		Student data = dao.findStudent("00002");
+		
+		System.out.println(data.toString());
+		LOGGER.info("testFindStudent() executed");
+	}
 }
