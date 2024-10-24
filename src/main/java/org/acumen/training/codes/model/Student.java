@@ -3,6 +3,8 @@ package org.acumen.training.codes.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,6 +14,8 @@ public class Student {
 	private String name;
 	private String deptName;
 	private Integer totCred;
+	
+	private Department dept;
 
 	@Id
 	@Column(name = "id", unique = true, length = 5)
@@ -37,8 +41,8 @@ public class Student {
 		return deptName;
 	}
 
-	public void setDeptName(String dept_name) {
-		this.deptName = dept_name;
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
 	}
 
 	@Column(name = "tot_cred")
@@ -46,7 +50,17 @@ public class Student {
 		return totCred;
 	}
 
-	public void setTotCred(Integer tot_cred) {
-		this.totCred = tot_cred;
+	public void setTotCred(Integer totCred) {
+		this.totCred = totCred;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "dept_name", insertable = false, updatable = false)
+	public Department getDept() {
+		return dept;
+	}
+
+	public void setDept(Department dept) {
+		this.dept = dept;
 	}
 }
