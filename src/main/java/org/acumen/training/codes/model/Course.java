@@ -41,7 +41,7 @@ public class Course {
 		this.deptName = deptName;
 	}
 
-	@Column(name = "credit")
+	@Column(name = "credits")
 	public Integer getCredits() {
 		return credits;
 	}
