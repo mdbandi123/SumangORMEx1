@@ -1,5 +1,7 @@
 package org.acumen.training.codes.test;
 
+import java.util.List;
+
 import org.acumen.training.codes.UnivConfiguration;
 import org.acumen.training.codes.dao.StudentDao;
 import org.acumen.training.codes.model.Student;
@@ -48,6 +50,7 @@ public class TestStudentDao {
 		LOGGER.info("testInsertStudent() executed");
 	}
 	
+	@Disabled
 	@Test
 	public void testFindStudent() {
 		cfg.createConfiguration();
@@ -58,5 +61,17 @@ public class TestStudentDao {
 		
 		System.out.println(data.toString());
 		LOGGER.info("testFindStudent() executed");
+	}
+	
+	@Test
+	public void testFindStudentPerCourse() {
+		cfg.createConfiguration();
+		SessionFactory sf = cfg.getSessionFactory();
+		StudentDao dao = new StudentDao(sf);
+		
+		List<Student> data = dao.findStudentPerCourse("Music");
+		
+		System.out.println(data.toString());
+		LOGGER.info("testFindStudentPerCourse executed");
 	}
 }
