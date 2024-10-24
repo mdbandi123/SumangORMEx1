@@ -1,9 +1,11 @@
 package org.acumen.training.codes.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.acumen.training.codes.model.Instructor;
+import org.acumen.training.codes.model.Teaches;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -12,6 +14,8 @@ import org.jboss.logging.Logger;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Root;
 
 public class TeacherDao {
@@ -125,25 +129,50 @@ public class TeacherDao {
 	}
 	
 	public List<Instructor> findInstructor(String course) {
-		LOGGER.info("executing findInstructor()...");
-		List<Instructor> recs = new ArrayList<>();
-		
-		try (Session sess = sf.openSession();) {
-			CriteriaBuilder builder = sess.getCriteriaBuilder();
-			CriteriaQuery<Instructor> sql = builder.createQuery(Instructor.class);
-			Root<Instructor> from = sql.from(Instructor.class);
-			
-			sql.select(from).where(builder.equal(from.get("deptName"), course));
+	    LOGGER.info("executing findInstructor()...");
+	    List<Instructor> recs = new ArrayList<>();
+	    
+	    try (Session sess = sf.openSession();) {
+	        CriteriaBuilder builder = sess.getCriteriaBuilder();
+	        CriteriaQuery<Instructor> sql = builder.createQuery(Instructor.class);
+	        Root<Instructor> from = sql.from(Instructor.class);
+	        
+	        sql.select(from).where(builder.equal(from.get("deptName"), course)); 
 
-			Query<Instructor> query = sess.createQuery(sql);
-			
-			LOGGER.info("findInstructor() executed successfully");
-			return recs = query.getResultList();
-		} catch (Exception e) {
-			LOGGER.error("caught an exception findInstructor(): %s"
-					.formatted(e.getMessage()));
-			e.printStackTrace();
-		}
-		return recs;
+	        Query<Instructor> query = sess.createQuery(sql);
+	        
+	        LOGGER.info("findInstructor() executed successfully");
+	        return recs = query.getResultList(); 
+	    } catch (Exception e) {
+	        LOGGER.error("caught an exception findInstructor(): %s".formatted(e.getMessage()));
+	        e.printStackTrace();
+	    }
+	    return recs;
 	}
+	
+	public List<Instructor> findInstructorNoCourses() {
+	    LOGGER.info("executing findInstructorNoCourses()...");
+	    List<Instructor> recs = new ArrayList<>();
+
+	    try (Session sess = sf.openSession()) {
+	        CriteriaBuilder builder = sess.getCriteriaBuilder();
+	        CriteriaQuery<Instructor> query = builder.createQuery(Instructor.class);
+	        Root<Instructor> sql = query.from(Instructor.class);
+	        
+	        Join<Instructor, Teaches> join = sql.join("teaches", JoinType.LEFT);
+	        
+	        query.select(sql).where(builder.isNull(join.get("ids")));
+	        Query<Instructor> resultQuery = sess.createQuery(query);
+	        
+	        recs = resultQuery.getResultList();
+
+	        LOGGER.info("findInstructorNoCourses() executed successfully");
+	        return Collections.unmodifiableList(recs);
+	    } catch (Exception e) {
+	        LOGGER.error("caught an exception findInstructorNoCourses(): %s".formatted(e.getMessage()));
+	        e.printStackTrace();
+	    }
+	    return recs;
+	}
+
 }

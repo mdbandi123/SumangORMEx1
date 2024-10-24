@@ -1,8 +1,13 @@
 package org.acumen.training.codes.model;
 
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,6 +17,8 @@ public class Instructor {
 	private String name;
 	private String deptName;
 	private Double salary;
+	
+	private Set<Teaches> teaches;
 
 	@Id
 	@Column(name = "id", unique = true, length = 5)
@@ -48,6 +55,15 @@ public class Instructor {
 
 	public void setSalary(Double salary) {
 		this.salary = salary;
+	}
+	
+	@OneToMany(mappedBy = "instructor", fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REMOVE })
+	public Set<Teaches> getTeaches() {
+		return teaches;
+	}
+	
+	public void setTeaches(Set<Teaches> teaches) {
+		this.teaches = teaches;
 	}
 	
 	@Override

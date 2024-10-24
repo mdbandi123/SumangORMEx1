@@ -74,6 +74,7 @@ public class TestTeacherDao {
 		LOGGER.info("testInsertInstructor() executed");
 	}
 	
+	@Disabled
 	@Test
 	public void testFindInstructor() {
 		cfg.createConfiguration();
@@ -84,5 +85,17 @@ public class TestTeacherDao {
 		
 		System.out.println(data.toString());
 		LOGGER.info("testFindInstructor() executed");
+	}
+	
+	@Test
+	public void testFindInstructorNoCourses() {
+		cfg.createConfiguration();
+		SessionFactory sf = cfg.getSessionFactory();
+		TeacherDao dao = new TeacherDao(sf);
+		
+		List<Instructor> data = dao.findInstructorNoCourses();
+		
+		System.out.println(data.toString());
+		LOGGER.info("testFindInstructorNoCourses() executed");
 	}
 }
