@@ -25,7 +25,7 @@
 		<mapping class="org.acumen.training.codes.model.Student" />
 		<mapping class="org.acumen.training.codes.model.Takes" />
 		<mapping class="org.acumen.training.codes.model.Teaches" />
-		<mapping class="org.acumen.training.codes.model.Timeslot" />
+		<mapping class="org.acumen.training.codes.model.TimeSlot" />
 
 		<mapping
 			class="org.acumen.training.codes.model.compositekeys.ClassroomId" />
@@ -38,6 +38,6 @@
 		<mapping
 			class="org.acumen.training.codes.model.compositekeys.TeachesId" />
 		<mapping
-			class="org.acumen.training.codes.model.compositekeys.TimeslotId" />
+			class="org.acumen.training.codes.model.compositekeys.TimeSlotId" />
 	</session-factory>
 </hibernate-configuration>
